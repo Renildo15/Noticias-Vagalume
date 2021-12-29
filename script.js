@@ -6,22 +6,25 @@ const fazerGet = (url) => {
 }
 
 const data = (news) =>{
+    let sec = document.createElement("section");
     let div = document.createElement("div");
     let span = document.createElement("span");
     let span_2 = document.createElement("span");
 
+    div.classList.add("data");
     span.innerHTML = news.inserted;
     span_2.innerHTML = news.modified;
 
     div.appendChild(span);
     div.appendChild(span_2);
+    sec.appendChild(div);
 
-    return div;
+    return sec;
 }
 
 const image = (news) =>{
-    let div = document.createElement("div");
-    let div_h2 = document.createElement("div")
+    let sec = document.createElement("section");
+    let div= document.createElement("div")
     let anc = document.createElement("a")
     let img = document.createElement("img");
     let title = document.createElement("h2");
@@ -37,19 +40,23 @@ const image = (news) =>{
 
     div.appendChild(img);
     anc.appendChild(title);
-    div_h2.appendChild(anc);
-    div.appendChild(div_h2);
+    div.appendChild(anc);
     div.appendChild(kicker);
+    sec.appendChild(div);
     
 
-    return div;
+    return sec;
 }
 const createTag = (news) =>{
     console.log(news);
+    let sec = document.createElement("section")
     let div = document.createElement("div");
+    sec.classList.add("conteudo");
+    div.classList.add("conteudo-news")
     div.appendChild(data(news));
     div.appendChild(image(news));
-    return div;
+    sec.appendChild(div);
+    return sec;
 }
 
 
@@ -63,6 +70,8 @@ const main = () =>{
         let tag = createTag(element);
         conteudo.appendChild(tag);
     })
+
 }
+
 
 main();
