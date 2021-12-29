@@ -5,15 +5,50 @@ const fazerGet = (url) => {
     return request.responseText;
 }
 
+const data = (news) =>{
+    let div = document.createElement("div");
+    let span = document.createElement("span");
+    let span_2 = document.createElement("span");
+
+    span.innerHTML = news.inserted;
+    span_2.innerHTML = news.modified;
+
+    div.appendChild(span);
+    div.appendChild(span_2);
+
+    return div;
+}
+
+const image = (news) =>{
+    let div = document.createElement("div");
+    let div_h2 = document.createElement("div")
+    let anc = document.createElement("a")
+    let img = document.createElement("img");
+    let title = document.createElement("h2");
+    let kicker = document.createElement("span");
+
+    div.classList.add("image");
+    title.innerHTML = news.headline;
+    kicker.innerHTML = news.kicker;
+    img.innerHTML = img.setAttribute("src", "https://www.vagalume.com.br"+news.pic_src);
+    img.innerHTML = "";
+    anc.innerHTML = anc.setAttribute("href", news.url);
+    anc.innerHTML = "";
+
+    div.appendChild(img);
+    anc.appendChild(title);
+    div_h2.appendChild(anc);
+    div.appendChild(div_h2);
+    div.appendChild(kicker);
+    
+
+    return div;
+}
 const createTag = (news) =>{
     console.log(news);
-    let div = document.createElement("div")
-    let test = document.createElement("h1");
-
-    test.innerHTML = "Teste"
-
-    div.appendChild(test);
-
+    let div = document.createElement("div");
+    div.appendChild(data(news));
+    div.appendChild(image(news));
     return div;
 }
 
