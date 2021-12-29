@@ -6,28 +6,21 @@ const fazerGet = (url) => {
 }
 
 const data = (news) =>{
-    let sec = document.createElement("section");
     let div = document.createElement("div");
     let span = document.createElement("span");
-    let span_2 = document.createElement("span");
 
     div.classList.add("data");
-    span.innerHTML = news.inserted;
-    span_2.innerHTML = news.modified;
-
+    span.innerHTML = "Publicado em: " + news.inserted + `<br>`;
     div.appendChild(span);
-    div.appendChild(span_2);
-    sec.appendChild(div);
 
-    return sec;
+    return div;
 }
 
 const image = (news) =>{
-    let sec = document.createElement("section");
     let div= document.createElement("div")
     let anc = document.createElement("a")
     let img = document.createElement("img");
-    let title = document.createElement("h2");
+    let title = document.createElement("h4");
     let kicker = document.createElement("span");
 
     div.classList.add("image");
@@ -37,26 +30,22 @@ const image = (news) =>{
     img.innerHTML = "";
     anc.innerHTML = anc.setAttribute("href", news.url);
     anc.innerHTML = "";
-
+    
+    div.appendChild(data(news));
     div.appendChild(img);
     anc.appendChild(title);
     div.appendChild(anc);
     div.appendChild(kicker);
-    sec.appendChild(div);
     
 
-    return sec;
+    return div;
 }
 const createTag = (news) =>{
     console.log(news);
-    let sec = document.createElement("section")
     let div = document.createElement("div");
-    sec.classList.add("conteudo");
     div.classList.add("conteudo-news")
-    div.appendChild(data(news));
     div.appendChild(image(news));
-    sec.appendChild(div);
-    return sec;
+    return div;
 }
 
 
@@ -65,10 +54,11 @@ const main = () =>{
     let news = JSON.parse(data);
     let noticias = news.news;
     let conteudo = document.getElementById("conteudo");
+    let secNews = document.getElementById("news")
 
     noticias.forEach(element =>{
-        let tag = createTag(element);
-        conteudo.appendChild(tag);
+        let tag = image(element);
+        secNews.appendChild(tag);
     })
 
 }
